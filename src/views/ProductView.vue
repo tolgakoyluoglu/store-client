@@ -1,7 +1,7 @@
 <template>
-  <div class="home">
-    <h1>Dashboard</h1>
+  <div>
+    <h1>Product</h1>
   </div>
 </template>
-
 <script setup lang="ts"></script>
+<style lang=""></style>
