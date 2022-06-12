@@ -1,32 +1,30 @@
 <template>
+  <img class="banner" src="../../resources/images/sale.jpeg" />
   <div class="container">
-    <div></div>
-    <div class="wrapper">
-      <div class="left-menu">
-        <SidebarMenu />
-      </div>
-      <div class="products-wrapper">
-        <h1>Products</h1>
-        <ProductFilter />
-        <div class="products">
-          <div class="product" v-for="product in products" :key="product.id">
-            <h4>{{ product.name }}</h4>
-            <img class="product-image" />
-          </div>
-        </div>
+    <div class="left-menu">
+      <SidebarMenu />
+    </div>
+    <div class="right-content">
+      <h1>Products</h1>
+      <ProductFilter />
+      <div class="products-list">
+        <ProductCard :products="products" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import api from '@/api'
 import { onMounted, ref } from 'vue'
+import api from '@/api'
 import SidebarMenu from '@/components/SidebarMenu.vue'
 import ProductFilter from '@/components/ProductFilter.vue'
+import ProductCard from '@/components/ProductCard.vue'
+import Product from '@/types/Product'
+import Category from '@/types/Category'
 
-const products = ref<any>([])
-const categories = ref<any>([])
+const products = ref<Product>()
+const categories = ref<Category>()
 
 onMounted(() => {
   getAllProducts()
@@ -51,12 +49,11 @@ async function getAllCategories() {
 </script>
 
 <style scoped>
-.product-image {
-  width: 250px;
-  height: 320px;
-}
-.products {
+.products-list {
   min-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  grid-gap: 2px;
 }
 .left-menu {
   display: none;
@@ -64,31 +61,29 @@ async function getAllCategories() {
 h1 {
   margin-top: 0;
 }
+.banner {
+  width: 100%;
+}
 @media screen and (min-width: 1100px) {
   .left-menu {
     min-width: 20%;
     display: block;
   }
   .container {
-    max-width: 1800px;
-    padding: 0 20px;
+    padding: 16px 0;
     margin: auto;
-  }
-  .wrapper {
     display: flex;
   }
-  .products-wrapper {
+  .right-content {
     width: 80%;
   }
 }
 @media screen and (min-width: 720px) {
-  .products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 250px);
-    grid-gap: 1rem;
+  .products-list {
+    grid-gap: 16px;
     justify-content: space-between;
   }
-  .products-wrapper {
+  .right-content {
     display: flex;
     flex-direction: column;
   }

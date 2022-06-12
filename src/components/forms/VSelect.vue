@@ -8,6 +8,7 @@
         v-for="(option, i) in options"
         :key="i"
         @click="selectOption(option)"
+        @change="handleChange(option)"
         class="option"
         :class="{ current: option.name === selectedOption }"
       >
@@ -20,7 +21,7 @@
 <script setup lang="ts">
 import { ref, defineEmits, defineProps } from 'vue'
 
-const emit = defineEmits(['input'])
+const emit = defineEmits(['input', 'change'])
 defineProps({
   placeholder: {
     type: String,
@@ -38,8 +39,11 @@ const open = ref<boolean>(false)
 const selectedOption = ref<string>('')
 
 const selectOption = (option: any) => {
-  selectedOption.value = option.name
+  selectedOption.value = option || option.name
   emit('input', option)
+}
+const handleChange = (option: any) => {
+  emit('change', option)
 }
 </script>
 
@@ -53,6 +57,7 @@ const selectOption = (option: any) => {
   border-radius: 4px;
   align-items: center;
   background: #ffffff;
+  cursor: pointer;
 }
 .text {
   padding: 6px 12px;
@@ -77,7 +82,6 @@ const selectOption = (option: any) => {
   overflow: auto;
   margin-top: 195px;
   background: #ffffff;
-  cursor: pointer;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   text-align: left;
