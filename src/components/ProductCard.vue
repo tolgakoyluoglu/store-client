@@ -1,7 +1,10 @@
 <template>
-  <div v-for="product in products" :key="product.id">
-    <h4>{{ product.name }}</h4>
+  <div class="product pointer" v-for="product in products" :key="product.id">
     <div class="product-image bg-1"></div>
+    <div class="product-info">
+      <h4 class="m-0">{{ product.name }}</h4>
+      <span>{{ product.price }} kr </span>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -17,6 +20,12 @@ defineProps({
 .product-image {
   width: 200px;
   height: 280px;
+  margin-top: 24px;
+}
+.product-info {
+  text-align: left;
+  margin-top: 8px;
+  font-size: 14px;
 }
 @media screen and (min-width: 900px) {
   .product-image {

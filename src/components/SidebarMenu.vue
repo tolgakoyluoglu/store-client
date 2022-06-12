@@ -1,16 +1,18 @@
 <template>
   <div class="sidebar-menu">
     <div class="categories">
-      <h4>Cloths</h4>
+      <h3>Cloths</h3>
       <div v-for="category in state.categories" :key="category.id" class="item">
-        <span class="item-name">{{ category.name }}</span>
-        <div v-for="children in category.children" :key="children.id">
-          <span class="item-name child">{{ children.name }}</span>
+        <span @click="category.isActive = !category.isActive" class="item-name">{{ category.name }}</span>
+        <div v-if="category.isActive">
+          <div v-for="children in category.children" :key="children.id" class="item">
+            <span @click="getProducts(children.id)" class="item-name child">{{ children.name }}</span>
+          </div>
         </div>
       </div>
     </div>
     <div class="recent-products">
-      <h4>Recent viewed products</h4>
+      <h3>Recent viewed products</h3>
       <span>Your most recent products will be shown here</span>
     </div>
   </div>
@@ -21,7 +23,8 @@ import api from '@/api'
 import Category from '@/types/Category'
 
 const state = reactive({
-  categories: [] as Category[]
+  categories: [] as Category[],
+  collapse: false
 })
 
 onMounted(() => {
@@ -35,6 +38,14 @@ const getCategories = async () => {
     console.log(error)
   }
 }
+const getProducts = async (category_id: string) => {
+  try {
+    const response = await api.get(`/products/${category_id}`)
+    console.log(response.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
 </script>
 <style scoped>
 .sidebar-menu {
@@ -44,13 +55,14 @@ const getCategories = async () => {
 }
 .item {
   cursor: pointer;
-  margin-bottom: 8px;
+  margin: 8px 0;
 }
 .item span {
-  font-size: 16px;
+  user-select: none;
+  font-size: 18px;
 }
 .child {
   margin-left: 8px;
-  font-size: 14px !important;
+  font-size: 16px !important;
 }
 </style>

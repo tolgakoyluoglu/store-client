@@ -1,13 +1,13 @@
 <template>
   <nav class="navbar bg-1">
-    <div class="container">
+    <div class="container d-flex">
       <div class="items">
         <router-link to="/products">Shop</router-link> |
         <router-link to="/admin">Admin</router-link>
       </div>
       <div class="items">
         <router-link to="/">
-          <h1>Store</h1>
+          <h1 class="m-0">Store</h1>
         </router-link>
       </div>
       <div class="items">
@@ -24,13 +24,9 @@
 }
 .container {
   margin: auto;
-  display: flex;
   justify-content: space-between;
   align-items: center;
   width: 1600px;
-}
-h1 {
-  margin: 0;
 }
 
 .navbar a {

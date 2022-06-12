@@ -39,4 +39,23 @@ html {
   margin: auto;
   min-height: calc(100vh - 70px);
 }
+.pointer {
+  cursor: pointer;
+}
+.d-flex {
+  display: flex;
+}
+.mb-0 {
+  margin-bottom: 0;
+}
+.mt-0 {
+  margin-top: 0;
+}
+.m-0 {
+  margin: 0;
+}
+.d-flex-center {
+  display: flex;
+  justify-content: center;
+}
 </style>

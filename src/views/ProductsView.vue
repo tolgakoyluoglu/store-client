@@ -1,11 +1,11 @@
 <template>
   <img class="banner" src="../../resources/images/sale.jpeg" />
-  <div class="container">
+  <div class="container d-flex">
     <div class="left-menu">
       <SidebarMenu />
     </div>
-    <div class="right-content">
-      <h1>Products</h1>
+    <div class="right-content d-flex">
+      <h1 class="mt-0">All Products</h1>
       <ProductFilter />
       <div class="products-list">
         <ProductCard :products="products" />
@@ -58,9 +58,6 @@ async function getAllCategories() {
 .left-menu {
   display: none;
 }
-h1 {
-  margin-top: 0;
-}
 .banner {
   width: 100%;
 }
@@ -72,7 +69,6 @@ h1 {
   .container {
     padding: 16px 0;
     margin: auto;
-    display: flex;
   }
   .right-content {
     width: 80%;
@@ -84,7 +80,6 @@ h1 {
     justify-content: space-between;
   }
   .right-content {
-    display: flex;
     flex-direction: column;
   }
   .v-select {

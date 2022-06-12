@@ -5,6 +5,7 @@ interface Category {
   children: Category[]
   description?: string
   image: string
+  isActive?: boolean
 }
 
 export default Category

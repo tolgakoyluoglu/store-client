@@ -2,7 +2,7 @@
   <div>
     <h1>Admin</h1>
   </div>
-  <div class="container">
+  <div class="container d-flex-center">
     <div class="create">
       <div>
         <h2>Create Product</h2>
@@ -93,10 +93,6 @@ async function getCategories() {
 }
 </script>
 <style scoped>
-.container {
-  justify-content: center;
-  display: flex;
-}
 .create {
   margin: 0 2rem;
   width: 500px;

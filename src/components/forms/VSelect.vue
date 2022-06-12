@@ -1,5 +1,5 @@
 <template>
-  <div class="v-select" @click="open = !open" tabindex="0" @blur="open = false">
+  <div class="v-select d-flex" @click="open = !open" tabindex="0" @blur="open = false">
     <span class="text">
       {{ selectedOption || placeholder }}
     </span>
@@ -70,7 +70,6 @@ const handleChange = (option: any) => {
   height: 42px;
   border: 1px solid #e0e0e0;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
-  display: flex;
   border-radius: 4px;
   align-items: center;
   background: #ffffff;
