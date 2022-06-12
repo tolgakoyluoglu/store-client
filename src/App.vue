@@ -33,18 +33,6 @@ html {
   background-color: #fff;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 .page-container {
   max-width: 1600px;
   padding: 16px;

@@ -5,12 +5,12 @@
     </span>
     <div class="options" v-if="open">
       <div
-        v-for="(option, i) in options"
+        v-for="(option, i) in filteredOptions"
         :key="i"
         @click="selectOption(option)"
         @change="handleChange(option)"
         class="option"
-        :class="{ current: option.name === selectedOption }"
+        :class="{ current: option.name ? option.name === selectedOption : option === selectedOption }"
       >
         {{ option.name || option }}
       </div>
@@ -19,10 +19,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits, defineProps } from 'vue'
+import { ref, defineEmits, defineProps, computed } from 'vue'
 
 const emit = defineEmits(['input', 'change'])
-defineProps({
+const props = defineProps({
   placeholder: {
     type: String,
     default: 'Select'
@@ -30,16 +30,33 @@ defineProps({
   options: {
     type: Object || String || Array || Number,
     required: true
+  },
+  /* Here we can load the name dynamically and replace the key in filteredOptions() */
+  name: {
+    type: String
   }
 })
-//Todo: Keyboard navigation
-// Todo: Computed for options, We can send in a prop e.g my display key name should be from the object property "title",
-// we can then override "title" with "name" key instead.
+
 const open = ref<boolean>(false)
 const selectedOption = ref<string>('')
 
+const filteredOptions = computed(() => {
+  let filteredArray
+  if (props.name) {
+    let tempObject = {}
+    filteredArray = props.options.map((option: any) => {
+      const key = props.name || ''
+      tempObject = { name: option[key], ...option }
+      return tempObject
+    })
+  } else {
+    filteredArray = props.options
+  }
+  return filteredArray
+})
+
 const selectOption = (option: any) => {
-  selectedOption.value = option || option.name
+  selectedOption.value = option.name ? option.name : option
   emit('input', option)
 }
 const handleChange = (option: any) => {
@@ -49,7 +66,7 @@ const handleChange = (option: any) => {
 
 <style scoped>
 .v-select {
-  width: 256px;
+  width: 250px;
   height: 42px;
   border: 1px solid #e0e0e0;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
@@ -76,11 +93,11 @@ const handleChange = (option: any) => {
 }
 .options {
   position: absolute;
-  height: 150px;
-  width: 256px;
+  height: 133px;
+  width: 250px;
   margin-right: 30px;
   overflow: auto;
-  margin-top: 195px;
+  margin-top: 180px;
   background: #ffffff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -95,5 +112,11 @@ const handleChange = (option: any) => {
 }
 .option:hover {
   background: #f5f5f5;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
 }
 </style>
