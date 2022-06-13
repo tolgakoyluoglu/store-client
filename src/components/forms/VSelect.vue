@@ -1,8 +1,9 @@
 <template>
   <div class="v-select d-flex" @click="open = !open" tabindex="0" @blur="open = false">
-    <span class="text">
-      {{ selectedOption || placeholder }}
+    <span class="text" v-if="selectedOption">
+      {{ selectedOption }}
     </span>
+    <span v-else class="text placeholder"> {{ placeholder }}</span>
     <div class="options" v-if="open">
       <div
         v-for="(option, i) in filteredOptions"
@@ -66,7 +67,8 @@ const handleChange = (option: any) => {
 
 <style scoped>
 .v-select {
-  width: 250px;
+  margin-top: 16px;
+  width: 100%;
   height: 42px;
   border: 1px solid #e0e0e0;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
@@ -74,12 +76,15 @@ const handleChange = (option: any) => {
   align-items: center;
   background: #ffffff;
   cursor: pointer;
+  font-size: 14px;
 }
 .text {
   padding: 6px 12px;
   width: 212px;
   height: 20px;
   text-align: left;
+}
+.placeholder {
   color: #757575;
 }
 .v-select:hover {

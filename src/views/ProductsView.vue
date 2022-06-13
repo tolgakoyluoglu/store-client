@@ -1,10 +1,10 @@
 <template>
   <img class="banner" src="../../resources/images/sale.jpeg" />
-  <div class="container d-flex">
+  <div class="container d-flex-center">
     <div class="left-menu">
       <SidebarMenu />
     </div>
-    <div class="right-content d-flex">
+    <div class="right-content">
       <h1 class="mt-0">All Products</h1>
       <ProductFilter />
       <div class="products-list">

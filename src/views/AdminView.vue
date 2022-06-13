@@ -9,12 +9,12 @@
       </div>
       <div>
         <div class="inputs">
-          <VInput v-model="product.name" placeholder="Name" />
-          <VInput v-model="product.description" placeholder="Description" />
-          <VInput v-model="product.price" placeholder="Price" />
-          <VInput v-model="product.stock" placeholder="Stock" />
-          <VInput v-model="product.category_id" placeholder="Category ID" />
-          <VInput v-model="product.image" placeholder="Image url" />
+          <VInput v-model="state.product.name" placeholder="Name" />
+          <VInput v-model="state.product.description" placeholder="Description" />
+          <VInput v-model="state.product.price" placeholder="Price" />
+          <VInput v-model="state.product.stock" placeholder="Stock" />
+          <VSelect :options="state.categories" placeholder="Category" name="name" @input="selectCategory" />
+          <VInput v-model="state.product.image" placeholder="Image url" />
         </div>
         <VButton @click.prevent="createProduct">Add</VButton>
       </div>
@@ -25,9 +25,9 @@
       </div>
       <div>
         <div class="inputs">
-          <VInput v-model="category.name" placeholder="Name" />
-          <VInput v-model="category.description" placeholder="Description" />
-          <VInput v-model="category.parent_id" placeholder="Parent ID" />
+          <VInput v-model="state.category.name" placeholder="Name" />
+          <VInput v-model="state.category.description" placeholder="Description" />
+          <VSelect :options="state.categories" placeholder="Parent Category" @input="selectCategory" name="name" />
         </div>
         <VButton @click.prevent="createCategory">Add</VButton>
       </div>
@@ -39,46 +39,53 @@ import VInput from '@/components/forms/VInput.vue'
 import VButton from '@/components/forms/VButton.vue'
 import { ref, reactive, onMounted } from 'vue'
 import api from '@/api'
+import VSelect from '@/components/forms/VSelect.vue'
+import Category from '@/types/Category'
 
-const product = reactive({
-  name: ref<string>(''),
-  description: ref<string>(''),
-  price: ref<number>(),
-  stock: ref<number>(),
-  category_id: ref<number>(),
-  image: ref<string>()
+const state = reactive({
+  product: {
+    name: '' as string,
+    description: '' as string,
+    price: 0 as number,
+    stock: 0 as number,
+    category_id: '' as string,
+    image: '' as string
+  },
+  category: {
+    name: ref<string>(''),
+    description: ref<string>(''),
+    parent_id: ref<number>()
+  },
+  selectedCategory: {} as Category,
+  categories: [] as Category[]
 })
-const category = reactive({
-  name: ref<string>(''),
-  description: ref<string>(''),
-  parent_id: ref<number>()
-})
+
 onMounted(() => {
   getCategories()
 })
 
+function selectCategory(category: Category) {
+  state.selectedCategory = category
+}
 async function createProduct() {
   try {
-    const { name, description, price, stock, category_id, image } = product
-    if (!name || !description || !price || !stock || !category_id || !image) {
+    const { name, description, price, stock, image } = state.product
+    if (!name || !description || !price || !stock || !image || !state.selectedCategory) {
       return console.log('Error')
     }
-    const response = await api.post('/products', { ...product })
-
-    console.log(response.data)
+    await api.post('/products', { ...state.product, category_id: state.selectedCategory.id })
   } catch (error) {
     console.log(error)
   }
 }
+
 async function createCategory() {
   try {
-    const { name, description, parent_id } = category
-    if (!name || !description) {
-      return console.log('Error')
-    }
-    const response = await api.post('/categories', { ...category })
+    const { name, description } = state.category
+    if (!name || !description) return console.log('Error')
 
-    console.log(response.data)
+    await api.post('/categories', { ...state.category, parent_id: state.selectedCategory.id })
+    getCategories()
   } catch (error) {
     console.log(error)
   }
@@ -86,7 +93,7 @@ async function createCategory() {
 async function getCategories() {
   try {
     const response = await api.get('/categories')
-    console.log(response.data)
+    state.categories = response.data
   } catch (error) {
     console.log(error)
   }

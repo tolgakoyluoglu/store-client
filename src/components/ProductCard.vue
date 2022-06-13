@@ -21,6 +21,7 @@ defineProps({
   width: 200px;
   height: 280px;
   margin-top: 24px;
+  border-radius: 12px;
 }
 .product-info {
   text-align: left;

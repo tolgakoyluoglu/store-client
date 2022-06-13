@@ -25,11 +25,11 @@ const updateValue = (event: Event) => {
 <style scoped>
 .input {
   width: 100%;
-  padding: 10px 14px;
+  padding: 11.5px 14px;
   border-radius: 8px;
   box-sizing: border-box;
   border: 1px solid #d0d5dd;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
   outline: none;
   margin-top: 1rem;
 }

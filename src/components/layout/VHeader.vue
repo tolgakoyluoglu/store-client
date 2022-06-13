@@ -26,7 +26,7 @@
   margin: auto;
   justify-content: space-between;
   align-items: center;
-  width: 1600px;
+  max-width: 1600px;
 }
 
 .navbar a {

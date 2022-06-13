@@ -19,10 +19,6 @@ const size = ref('')
 const color = ref('')
 const price = ref('')
 const sortOption = ref('')
-
-const sort = () => {
-  console.log('sort')
-}
 </script>
 <style>
 .product-filter {

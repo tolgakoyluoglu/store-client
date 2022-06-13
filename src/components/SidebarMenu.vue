@@ -57,12 +57,12 @@ const getProducts = async (category_id: string) => {
   cursor: pointer;
   margin: 8px 0;
 }
-.item span {
+.item-name {
   user-select: none;
-  font-size: 18px;
+  font-size: 16px;
 }
 .child {
   margin-left: 8px;
-  font-size: 16px !important;
+  font-size: 14px;
 }
 </style>
