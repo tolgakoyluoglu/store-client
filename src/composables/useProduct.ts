@@ -28,7 +28,7 @@ function useProduct() {
   }
   async function getProductsByCategory(category: Category) {
     try {
-      const response = await api.get(`/products/category/${category}`)
+      const response = await api.get(`/products/category/${category.id}`)
       state.products = response.data
       state.selectedCategory = category
     } catch (error) {
