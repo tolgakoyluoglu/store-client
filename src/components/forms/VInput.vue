@@ -16,7 +16,7 @@ import { useInputProps } from '@/composables/useInput'
 const emit = defineEmits(['update:modelValue'])
 defineProps({ ...useInputProps() })
 
-const updateValue = (event: Event) => {
+function updateValue(event: Event) {
   const { target } = event
   if (target) emit('update:modelValue', (target as HTMLInputElement).value)
 }
@@ -35,10 +35,12 @@ const updateValue = (event: Event) => {
 }
 
 .input:focus {
+  border: 1px solid #e2dcff;
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #f4ebff;
 }
 .input:hover {
   border: 1px solid #694df9;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #f4ebff;
   border-radius: 4px;
 }
 </style>

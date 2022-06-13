@@ -32,19 +32,20 @@ const props = defineProps({
     type: Object || String || Array || Number,
     required: true
   },
-  /* Here we can load the name dynamically and replace the key in filteredOptions() */
+  /* Replace the key for the display name if options is an object */
   name: {
     type: String
   }
 })
 
 const open = ref<boolean>(false)
-const selectedOption = ref<string>('')
+const selectedOption = ref<string | object>('')
 
 const filteredOptions = computed(() => {
   let filteredArray
   if (props.name) {
     let tempObject = {}
+    // eslint-disable-next-line
     filteredArray = props.options.map((option: any) => {
       const key = props.name || ''
       tempObject = { name: option[key], ...option }
@@ -56,11 +57,11 @@ const filteredOptions = computed(() => {
   return filteredArray
 })
 
-const selectOption = (option: any) => {
+function selectOption(option: { name: string }) {
   selectedOption.value = option.name ? option.name : option
   emit('input', option)
 }
-const handleChange = (option: any) => {
+function handleChange(option: string) {
   emit('change', option)
 }
 </script>
@@ -68,19 +69,20 @@ const handleChange = (option: any) => {
 <style scoped>
 .v-select {
   margin-top: 16px;
-  width: 100%;
-  height: 42px;
-  border: 1px solid #e0e0e0;
+  max-width: 100%;
+  position: relative;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
+  border-radius: 8px;
   align-items: center;
   background: #ffffff;
   cursor: pointer;
   font-size: 14px;
+  box-sizing: border-box;
+  border: 1px solid #d0d5dd;
 }
 .text {
-  padding: 6px 12px;
-  width: 212px;
+  padding: 10px 12px;
+  width: 100%;
   height: 20px;
   text-align: left;
 }
@@ -89,22 +91,21 @@ const handleChange = (option: any) => {
 }
 .v-select:hover {
   border: 1px solid #694df9;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #f4ebff;
 }
 .v-select:focus {
   border: 1px solid #e2dcff;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #f4ebff;
 }
 .options {
   position: absolute;
-  height: 133px;
-  width: 250px;
-  margin-right: 30px;
+  height: 125px;
+  width: 100%;
   overflow: auto;
   margin-top: 180px;
   background: #ffffff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+  border-radius: 8px;
   text-align: left;
 }
 .current {
@@ -112,13 +113,13 @@ const handleChange = (option: any) => {
   color: #5e47d2;
 }
 .option {
-  padding: 6px 16px;
+  padding: 12px;
 }
 .option:hover {
   background: #f5f5f5;
 }
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 3px;
 }
 ::-webkit-scrollbar-thumb {
   background: #888;

@@ -1,11 +1,11 @@
 interface Category {
   id: string
   name: string
-  parent_id: string | null
+  parent_id: number | string
   children: Category[]
-  description?: string
+  description: string
   image: string
-  isActive?: boolean
+  isActive: boolean
 }
 
 export default Category

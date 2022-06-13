@@ -1,6 +1,12 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import mitt from 'mitt'
+import './pcss/style.pcss'
 
-createApp(App).use(store).use(router).mount('#app')
+const emitter = mitt()
+const app = createApp(App).use(router)
+
+app.provide('emitter', emitter)
+app.config.globalProperties.emitter = emitter
+app.mount('#app')

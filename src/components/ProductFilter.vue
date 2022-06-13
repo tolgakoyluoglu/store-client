@@ -1,9 +1,11 @@
 <template>
-  <div class="product-filter">
-    <VSelect placeholder="Size" :options="sizes" @input="((value: string) => size = value)" />
-    <VSelect placeholder="Color" :options="colors" @input="(value: string) => color = value" />
-    <VSelect placeholder="Price" :options="prices" @input="(value: string) => price = value" />
-    <VSelect placeholder="Sort" :options="sortOptions" @input="(value: string) => sortOption = value" />
+  <div class="container">
+    <div class="product-filter">
+      <VSelect placeholder="Size" :options="sizes" @input="((value: string) => size = value)" />
+      <VSelect placeholder="Color" :options="colors" @input="(value: string) => color = value" />
+      <VSelect placeholder="Price" :options="prices" @input="(value: string) => price = value" />
+      <VSelect placeholder="Sort" :options="sortOptions" @input="(value: string) => sortOption = value" />
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -20,17 +22,22 @@ const color = ref('')
 const price = ref('')
 const sortOption = ref('')
 </script>
-<style>
+<style scoped>
 .product-filter {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
-  grid-gap: 24px;
-  margin-right: 20px;
+  grid-template-columns: repeat(auto-fill, 100px);
+  grid-gap: 16px;
   justify-content: center;
+}
+.v-select {
+  margin-top: 0;
+}
+.container {
+  min-width: 100%;
 }
 @media screen and (min-width: 720px) {
   .product-filter {
-    grid-gap: 16px;
+    margin-right: 20px;
     justify-content: flex-start;
   }
 }

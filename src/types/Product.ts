@@ -5,6 +5,8 @@ interface Product {
   price: number
   image: string
   stock: number
+  size: string
+  color: string
   description: string
 }
 
