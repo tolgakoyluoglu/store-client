@@ -5,7 +5,6 @@
         <router-link to="/products">
           <li>Shop</li>
         </router-link>
-
         <router-link to="/admin"> <li>Admin</li></router-link>
       </div>
       <div class="items">
@@ -23,36 +22,95 @@
       </div>
     </div>
   </nav>
+  <nav class="responsive bg-1">
+    <div class="navbar">
+      <span @click="showMenu = !showMenu" class="material-icons pointer">menu</span>
+      <router-link to="/">
+        <h1 class="m-0" @click="showMenu = false">Store</h1>
+      </router-link>
+      <li>
+        <span class="material-icons pointer">shopping_cart</span>
+      </li>
+    </div>
+    <div v-if="showMenu" class="list-items" @click="showMenu = false">
+      <router-link to="/products">
+        <li>Shop</li>
+      </router-link>
+      <router-link to="/admin">
+        <li>Admin</li>
+      </router-link>
+      <router-link to="/login">
+        <li>Login</li>
+      </router-link>
+    </div>
+  </nav>
 </template>
-<script></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const showMenu = ref(false)
+</script>
 <style scoped lang="postcss">
+/* Desktop version */
 .navbar {
-  padding: 24px;
-  a {
-    font-weight: 700;
-    font-size: 18px;
-    color: #2c3e50;
-    text-decoration: none;
-  }
-  .container {
-    margin: auto;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1600px;
-  }
-  .items {
+  padding: 16px;
+  display: none;
+}
+/* Responsive menu */
+.responsive {
+  display: block;
+  .navbar {
     display: flex;
-    li {
-      list-style: none;
-      margin: 0 5px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .list-items {
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    margin-left: -5px;
+    a {
+      font-size: 24px;
     }
   }
+}
+li {
+  list-style: none;
+  margin: 0 5px;
+}
+a {
+  font-weight: 700;
+  font-size: 18px;
+  color: #2c3e50;
+  text-decoration: none;
 }
 .material-icons {
   font-size: 26px;
   margin-right: 20px;
 }
-.navbar a.router-link-exact-active {
+a.router-link-exact-active {
   color: #42b983;
+}
+
+/* Desktop version */
+@media screen and (min-width: 960px) {
+  .responsive {
+    display: none;
+  }
+  .navbar {
+    display: block;
+
+    .container {
+      margin: auto;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1600px;
+    }
+    .items {
+      display: flex;
+    }
+  }
 }
 </style>

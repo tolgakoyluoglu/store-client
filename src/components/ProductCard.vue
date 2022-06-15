@@ -28,12 +28,12 @@ function selectProduct(product: Product) {
 <style scoped>
 .product {
   margin-top: 16px;
-  width: 170px;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 .product-image {
-  height: 230px;
+  height: 100%;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -41,21 +41,18 @@ function selectProduct(product: Product) {
 .product-info {
   padding: 8px;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
 }
 .image {
   width: 100%;
 }
 
-@media screen and (min-width: 960px) {
-  .product {
-    width: 300px;
-  }
-  .product-image {
-    height: 320px;
-  }
+@media screen and (min-width: 690px) {
   .product-info {
     font-size: 14px;
+  }
+  .product {
+    width: 294px;
   }
 }
 </style>

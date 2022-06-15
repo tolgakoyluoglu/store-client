@@ -40,11 +40,11 @@ onMounted(() => {
   min-width: 100%;
   display: flex;
   flex-flow: wrap;
-  justify-content: flex-start;
-  grid-gap: 10px;
+  grid-gap: 8px;
+  justify-content: center;
 }
 .container {
-  padding: 16px 0;
+  padding: 16px;
   margin: auto;
 }
 .left-menu {
@@ -57,9 +57,12 @@ onMounted(() => {
   width: 100%;
 }
 h1 {
-  text-align: left;
+  text-align: center;
 }
 @media screen and (min-width: 960px) {
+  h1 {
+    text-align: left;
+  }
   .left-menu {
     min-width: 20%;
     display: block;
@@ -72,6 +75,7 @@ h1 {
     width: 80%;
   }
   .products-list {
+    justify-content: flex-start;
     grid-gap: 16px;
   }
   .v-select {
