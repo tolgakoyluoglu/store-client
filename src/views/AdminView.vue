@@ -13,7 +13,7 @@
           <VInput v-model="product.description" placeholder="Description" />
           <VInput v-model="product.price" placeholder="Price" />
           <VInput v-model="product.stock" placeholder="Stock" />
-          <VSelect :options="categories" placeholder="Category" name="name" @input="selectCategory" />
+          <VSelect :options="categories" placeholder="Category" name="name" @input="setSelectedCategory(category)" />
           <VInput v-model="product.image" placeholder="Image url" />
           <VInput v-model="product.size" placeholder="Size" />
           <VInput v-model="product.color" placeholder="Color" />
@@ -32,7 +32,7 @@
           <VSelect
             :options="categories"
             placeholder="Parent Category"
-            @input="() => setCategory(category)"
+            @input="() => setParentCategory(category)"
             name="name"
           />
         </div>
@@ -61,21 +61,16 @@ import { onMounted } from 'vue'
 import VInput from '@/components/forms/VInput.vue'
 import VButton from '@/components/forms/VButton.vue'
 import VSelect from '@/components/forms/VSelect.vue'
-import Category from '@/types/Category'
 import { useProduct } from '@/composables/useProduct'
 import { useCategory } from '@/composables/useCategory'
 
-const { getProducts, createProduct, product, products } = useProduct()
-const { getAllCategories, categories, category, setCategory, createCategory } = useCategory()
+const { getProducts, createProduct, setSelectedCategory, product, products } = useProduct()
+const { getAllCategories, setParentCategory, setCategory, createCategory, categories, category } = useCategory()
 
 onMounted(() => {
   getAllCategories()
   getProducts()
 })
-
-function selectCategory(category: Category) {
-  setCategory(category)
-}
 </script>
 <style scoped>
 .create {

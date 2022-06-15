@@ -38,10 +38,14 @@ onMounted(() => {
 <style scoped>
 .products-list {
   min-width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
-  grid-gap: 2px;
-  justify-content: center;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: flex-start;
+  grid-gap: 10px;
+}
+.container {
+  padding: 16px 0;
+  margin: auto;
 }
 .left-menu {
   display: none;
@@ -55,23 +59,20 @@ onMounted(() => {
 h1 {
   text-align: left;
 }
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 960px) {
   .left-menu {
     min-width: 20%;
     display: block;
   }
-  .container {
-    padding: 16px 0;
-    margin: auto;
+  .left-menu {
+    min-width: 20%;
+    display: block;
   }
   .right-content {
     width: 80%;
   }
-}
-@media screen and (min-width: 720px) {
   .products-list {
     grid-gap: 16px;
-    justify-content: space-between;
   }
   .v-select {
     margin-right: 20px;

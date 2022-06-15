@@ -26,27 +26,36 @@ function selectProduct(product: Product) {
 }
 </script>
 <style scoped>
+.product {
+  margin-top: 16px;
+  width: 170px;
+  display: flex;
+  flex-direction: column;
+}
 .product-image {
-  width: 200px;
-  height: 280px;
-  margin-top: 24px;
+  height: 230px;
   border-radius: 12px;
   display: flex;
   align-items: center;
 }
 .product-info {
-  margin-left: 5px;
+  padding: 8px;
   text-align: left;
-  margin-top: 8px;
-  font-size: 14px;
+  font-size: 12px;
 }
 .image {
   width: 100%;
 }
-@media screen and (min-width: 900px) {
+
+@media screen and (min-width: 960px) {
+  .product {
+    width: 300px;
+  }
   .product-image {
-    width: 250px;
     height: 320px;
+  }
+  .product-info {
+    font-size: 14px;
   }
 }
 </style>

@@ -10,6 +10,9 @@ function useProduct() {
     selectedCategory: {} as Category
   })
 
+  function setSelectedCategory(selectedCategory: Category) {
+    state.selectedCategory = selectedCategory
+  }
   async function getProduct(productId: string | string[]) {
     try {
       const response = await api.get(`/products/${productId}`)
@@ -49,13 +52,22 @@ function useProduct() {
       if (!name || !description || !price || !stock || !image || !state.selectedCategory) {
         return console.log('Error')
       }
+      console.log(state.selectedCategory, 'här')
       await api.post('/products', { ...state.product, category_id: state.selectedCategory.id })
     } catch (error) {
       console.log(error)
     }
   }
 
-  return { getProducts, getAllProducts, getProductsByCategory, createProduct, getProduct, ...toRefs(state) }
+  return {
+    getProducts,
+    getAllProducts,
+    getProductsByCategory,
+    createProduct,
+    getProduct,
+    setSelectedCategory,
+    ...toRefs(state)
+  }
 }
 
 export { useProduct }

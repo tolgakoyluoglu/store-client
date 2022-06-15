@@ -26,8 +26,8 @@ const sortOption = ref('')
 .product-filter {
   display: grid;
   grid-template-columns: repeat(auto-fill, 100px);
-  grid-gap: 16px;
-  justify-content: center;
+  grid-gap: 10px;
+  justify-content: flex-start;
 }
 .v-select {
   margin-top: 0;
@@ -35,10 +35,10 @@ const sortOption = ref('')
 .container {
   min-width: 100%;
 }
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 960px) {
   .product-filter {
+    grid-gap: 16px;
     margin-right: 20px;
-    justify-content: flex-start;
   }
 }
 </style>

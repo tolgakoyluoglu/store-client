@@ -20,6 +20,9 @@ function useCategory() {
       return result
     }, [])
   }
+  function setParentCategory(category: Category) {
+    state.selectedCategory = category
+  }
   function setCategory(category: Category) {
     state.category = category
   }
@@ -45,7 +48,7 @@ function useCategory() {
       console.log(error)
     }
   }
-  return { getAllCategories, createCategory, nestCategories, setCategory, ...toRefs(state) }
+  return { getAllCategories, createCategory, nestCategories, setParentCategory, setCategory, ...toRefs(state) }
 }
 
 export { useCategory }
