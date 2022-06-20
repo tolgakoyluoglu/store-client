@@ -40,7 +40,7 @@ onMounted(() => {
   min-width: 100%;
   display: flex;
   flex-flow: wrap;
-  grid-gap: 8px;
+  grid-gap: 16px;
   justify-content: center;
 }
 .container {
@@ -59,7 +59,7 @@ onMounted(() => {
 h1 {
   text-align: center;
 }
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 60em) {
   h1 {
     text-align: left;
   }
@@ -76,7 +76,6 @@ h1 {
   }
   .products-list {
     justify-content: flex-start;
-    grid-gap: 16px;
   }
   .v-select {
     margin-right: 20px;

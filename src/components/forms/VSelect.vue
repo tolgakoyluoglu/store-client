@@ -76,7 +76,7 @@ function handleChange(option: string) {
   align-items: center;
   background: #ffffff;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.875rem;
   box-sizing: border-box;
   border: 1px solid #d0d5dd;
 }

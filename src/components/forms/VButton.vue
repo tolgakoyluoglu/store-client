@@ -23,7 +23,7 @@ defineProps({
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
   border-radius: 4px;
   margin-right: 1rem;
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
 }
 .v-button:focus {

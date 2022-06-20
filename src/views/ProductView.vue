@@ -4,7 +4,7 @@
     <p>{{ product.description }}</p>
     <p>{{ product.color }}</p>
     <p>${{ product.price }}</p>
-    <img :src="product.image" :alt="product.image" />
+    <img :src="product.image" alt="No image =)" />
   </div>
 </template>
 <script setup lang="ts">
@@ -17,8 +17,7 @@ console.log(product)
 
 const route = useRoute()
 onMounted(() => {
-  const id = route?.params?.id
-  getProduct(id)
+  getProduct(route.params.id)
 })
 </script>
 <style lang="postcss" scoped></style>

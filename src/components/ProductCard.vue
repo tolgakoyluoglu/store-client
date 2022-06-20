@@ -41,18 +41,15 @@ function selectProduct(product: Product) {
 .product-info {
   padding: 8px;
   text-align: left;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 .image {
   width: 100%;
 }
 
-@media screen and (min-width: 690px) {
-  .product-info {
-    font-size: 14px;
-  }
+@media screen and (min-width: 43em) {
   .product {
-    width: 294px;
+    width: 31.5%;
   }
 }
 </style>

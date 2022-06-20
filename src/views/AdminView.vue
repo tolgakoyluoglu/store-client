@@ -1,31 +1,17 @@
 <template>
-  <div>
+  <div class="admin-view">
     <h1>Admin</h1>
-  </div>
-  <div class="d-flex-center">
-    <div class="create">
-      <div>
-        <h2>Create Product</h2>
-      </div>
-      <div>
-        <div class="inputs">
-          <VInput v-model="product.name" placeholder="Name" />
-          <VInput v-model="product.description" placeholder="Description" />
-          <VInput v-model="product.price" placeholder="Price" />
-          <VInput v-model="product.stock" placeholder="Stock" />
-          <VSelect :options="categories" placeholder="Category" name="name" @input="setSelectedCategory(category)" />
-          <VInput v-model="product.image" placeholder="Image url" />
-          <VInput v-model="product.size" placeholder="Size" />
-          <VInput v-model="product.color" placeholder="Color" />
-        </div>
-        <VButton @click.prevent="createProduct">Add</VButton>
-      </div>
+    <div class="tables">
+      <VDataTable :tableData="categories" />
+      <VButton @click="categoryModal = true">Create Category</VButton>
+      <VDataTable :tableData="products" />
+      <VButton @click="productModal = true">Create Product</VButton>
     </div>
-    <div class="create">
-      <div>
-        <h2>Create Category</h2>
-      </div>
-      <div>
+    <VModal :show="categoryModal" @close="categoryModal = false">
+      <template #header>
+        <h2 class="m-0">Create Category</h2>
+      </template>
+      <template #body>
         <div class="inputs">
           <VInput v-model="category.name" placeholder="Name" />
           <VInput v-model="category.description" placeholder="Description" />
@@ -36,49 +22,64 @@
             name="name"
           />
         </div>
-        <VButton @click.prevent="createCategory">Add</VButton>
-      </div>
-    </div>
-  </div>
-  <div class="">
-    <div class="list">
-      <h2>Products</h2>
-      <div class="product" v-for="product in products" :key="product.id">
-        {{ product.name }}
-      </div>
-    </div>
-    <div class="list">
-      <h2>Categories</h2>
-      <div class="category" v-for="category in categories" :key="category.id" @click="() => setCategory(category)">
-        {{ category.name }}
-      </div>
-    </div>
+      </template>
+      <template #footer>
+        <VButton @click.prevent="createCategory">Create</VButton>
+      </template>
+    </VModal>
+    <VModal :show="productModal" @close="productModal = false">
+      <template #header>
+        <h2 class="m-0">Create Product</h2>
+      </template>
+      <template #body>
+        <div class="inputs">
+          <VInput v-model="product.name" placeholder="Name" />
+          <VInput v-model="product.description" placeholder="Description" />
+          <VInput v-model="product.price" placeholder="Price" />
+          <VInput v-model="product.stock" placeholder="Stock" />
+          <VSelect :options="categories" placeholder="Category" name="name" @input="setSelectedCategory(category)" />
+          <VInput v-model="product.image" placeholder="Image url" />
+          <VInput v-model="product.size" placeholder="Size" />
+          <VInput v-model="product.color" placeholder="Color" />
+        </div>
+      </template>
+      <template #footer>
+        <VButton @click.prevent="createProduct">Create</VButton>
+      </template>
+    </VModal>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import VInput from '@/components/forms/VInput.vue'
 import VButton from '@/components/forms/VButton.vue'
 import VSelect from '@/components/forms/VSelect.vue'
 import { useProduct } from '@/composables/useProduct'
 import { useCategory } from '@/composables/useCategory'
+import VDataTable from '@/components/VDataTable.vue'
+import VModal from '@/components/VModal.vue'
 
 const { getProducts, createProduct, setSelectedCategory, product, products } = useProduct()
 const { getAllCategories, setParentCategory, setCategory, createCategory, categories, category } = useCategory()
+const categoryModal = ref(false)
+const productModal = ref(false)
 
 onMounted(() => {
   getAllCategories()
   getProducts()
 })
 </script>
-<style scoped>
-.create {
-  margin: 0 2rem;
-  width: 500px;
+<style scoped lang="postcss">
+.admin-view {
+  padding: 16px;
+  h1 {
+    margin-top: 0;
+  }
 }
-.list {
-  margin-right: 16px;
-  margin-top: 32px;
+.tables {
+  .v-button {
+    margin-bottom: 32px;
+  }
 }
 </style>

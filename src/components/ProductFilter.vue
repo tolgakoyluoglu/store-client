@@ -32,7 +32,7 @@ const sortOption = ref('')
   width: 150px;
   margin-top: 0;
 }
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 60em) {
   .product-filter {
     grid-gap: 16px;
     margin-right: 20px;

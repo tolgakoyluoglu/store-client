@@ -3,8 +3,8 @@
     <div class="categories">
       <h3 class="pointer" @click="$emit('select-category')">All Products</h3>
       <div v-for="category in categories" :key="category.id" class="item">
-        <span @click="category.isActive = !category.isActive" class="item-name">{{ category.name }}</span>
-        <div v-if="category.isActive">
+        <span @click="emit('select-category', category)" class="item-name">{{ category.name }}</span>
+        <div v-if="category.isActive && category.children">
           <div v-for="children in category.children" :key="children.id" class="item">
             <span @click="emit('select-category', children)" class="item-name child">{{ children.name }}</span>
           </div>
@@ -40,7 +40,7 @@ onMounted(() => {
 }
 .item-name {
   user-select: none;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 .child {
   margin-left: 8px;

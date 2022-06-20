@@ -52,7 +52,6 @@ function useProduct() {
       if (!name || !description || !price || !stock || !image || !state.selectedCategory) {
         return console.log('Error')
       }
-      console.log(state.selectedCategory, 'här')
       await api.post('/products', { ...state.product, category_id: state.selectedCategory.id })
     } catch (error) {
       console.log(error)

@@ -72,7 +72,7 @@ const showMenu = ref(false)
     text-align: center;
     margin-left: -5px;
     a {
-      font-size: 24px;
+      font-size: 1.5rem;
     }
   }
 }
@@ -82,20 +82,20 @@ li {
 }
 a {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 1.2rem;
   color: #2c3e50;
   text-decoration: none;
 }
 .material-icons {
-  font-size: 26px;
+  font-size: 1.6rem;
   margin-right: 20px;
 }
 a.router-link-exact-active {
-  color: #42b983;
+  color: #7f56d9;
 }
 
 /* Desktop version */
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 60em) {
   .responsive {
     display: none;
   }
@@ -106,7 +106,7 @@ a.router-link-exact-active {
       margin: auto;
       justify-content: space-between;
       align-items: center;
-      max-width: 1600px;
+      max-width: 1400px;
     }
     .items {
       display: flex;
