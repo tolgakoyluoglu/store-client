@@ -3,7 +3,7 @@
     <div class="categories">
       <h3 class="pointer" @click="$emit('select-category')">All Products</h3>
       <div v-for="category in categories" :key="category.id" class="item">
-        <span @click="emit('select-category', category)" class="item-name">{{ category.name }}</span>
+        <span @click="selectCategory(category)" class="item-name">{{ category.name }}</span>
         <div v-if="category.isActive && category.children">
           <div v-for="children in category.children" :key="children.id" class="item">
             <span @click="emit('select-category', children)" class="item-name child">{{ children.name }}</span>
@@ -21,12 +21,21 @@
 import { onMounted, defineEmits } from 'vue'
 import { useCategory } from '@/composables/useCategory'
 
-const { categories, getAllCategories } = useCategory()
+const { getAllCategories, categories } = useCategory()
 const emit = defineEmits(['select-category'])
 
 onMounted(() => {
   getAllCategories(true)
 })
+
+const selectCategory = (category: any) => {
+  // Make sure to collapse all categories before toggling the new category
+  categories.value.filter((category) => {
+    category.isActive = false
+  })
+  category.isActive = true
+  emit('select-category', category)
+}
 </script>
 <style scoped>
 .sidebar-menu {

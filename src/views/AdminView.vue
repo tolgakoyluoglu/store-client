@@ -18,13 +18,13 @@
           <VSelect
             :options="categories"
             placeholder="Parent Category"
-            @input="() => setParentCategory(category)"
+            @input="(category) => setParentCategory(category)"
             name="name"
           />
         </div>
       </template>
       <template #footer>
-        <VButton @click.prevent="createCategory">Create</VButton>
+        <VButton @click.prevent="createCategoryHandler">Create</VButton>
       </template>
     </VModal>
     <VModal :show="productModal" @close="productModal = false">
@@ -44,7 +44,7 @@
         </div>
       </template>
       <template #footer>
-        <VButton @click.prevent="createProduct">Create</VButton>
+        <VButton @click.prevent="createProductHandler">Create</VButton>
       </template>
     </VModal>
   </div>
@@ -59,9 +59,10 @@ import { useProduct } from '@/composables/useProduct'
 import { useCategory } from '@/composables/useCategory'
 import VDataTable from '@/components/VDataTable.vue'
 import VModal from '@/components/VModal.vue'
+import Category from '@/types/Category'
 
 const { getProducts, createProduct, setSelectedCategory, product, products } = useProduct()
-const { getAllCategories, setParentCategory, setCategory, createCategory, categories, category } = useCategory()
+const { getAllCategories, setParentCategory, createCategory, categories, category } = useCategory()
 const categoryModal = ref(false)
 const productModal = ref(false)
 
@@ -69,6 +70,15 @@ onMounted(() => {
   getAllCategories()
   getProducts()
 })
+
+const createCategoryHandler = () => {
+  createCategory()
+  categoryModal.value = false
+}
+const createProductHandler = () => {
+  createProduct()
+  productModal.value = false
+}
 </script>
 <style scoped lang="postcss">
 .admin-view {

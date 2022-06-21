@@ -1,4 +1,4 @@
-import { reactive, toRefs } from 'vue'
+import { reactive, toRefs, computed } from 'vue'
 import api from '@/api'
 import Category from '@/types/Category'
 
@@ -39,8 +39,9 @@ function useCategory() {
     try {
       const { name, description } = state.category
       if (!name || !description) return console.log('Error')
+      const data = { ...state.category, parent_id: state.selectedCategory.id }
 
-      await api.post('/categories', { ...state.category, parent_id: state.selectedCategory })
+      await api.post('/categories', data)
       state.category = {} as Category
       state.selectedCategory = {} as Category
       getAllCategories()
